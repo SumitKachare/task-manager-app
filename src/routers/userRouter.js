@@ -14,7 +14,7 @@ router.post('/users' , async (req, res)=>{
     try {
         await user.save()
         const token = await user.genAuthToken()
-     res.status(200).send({user , token})
+     res.status(201).send({user , token})
     } catch (e) {
         res.status(404).send(e)
     }
@@ -24,7 +24,7 @@ router.post('/users/login' , async (req , res)=>{
     try {
         const user = await User.findByCred(req.body.email , req.body.password)
         const token = await user.genAuthToken()
-        res.send({
+        res.status(200).send({
             user , token
         })
     } catch (e) {
